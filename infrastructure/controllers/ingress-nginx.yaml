@@ -32,8 +32,5 @@ spec:
         namespace: ingress-nginx
       interval: 1h
   values:
-    controller:
-      service:
-        type: "NodePort"
     admissionWebhooks:
       enabled: false
