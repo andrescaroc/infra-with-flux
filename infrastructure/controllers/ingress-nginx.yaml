@@ -33,6 +33,6 @@ spec:
       interval: 1h
   values:
     tcp:
-      8085: "tcp-echo/tcp-echo-server:8085"
+      "8085": "tcp-echo/tcp-echo-server:8085"
     admissionWebhooks:
       enabled: false
