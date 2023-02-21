@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: tcp-echo-server
+  namespace: tcp-echo
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  url: https://github.com/andrescaroc/tcp-echo-server.git
