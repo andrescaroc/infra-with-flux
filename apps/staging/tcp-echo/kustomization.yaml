@@ -4,7 +4,7 @@ namespace: tcp-echo
 resources:
   - ../../base/tcp-echo
 patches:
-  - path: deploy-patch.yaml
+  - path: image-tag-patch.yaml
     target:
-      kind: Deployment
+      kind: Kustomization
       name: tcp-echo-server

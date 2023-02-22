@@ -11,3 +11,6 @@ spec:
     kind: GitRepository
     name: tcp-echo-server
   targetNamespace: tcp-echo
+  images:
+    - name: tcp-echo-container
+      newTag: v0.1.8

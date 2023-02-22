@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/images/0/newTag
+  value: v0.1.8
