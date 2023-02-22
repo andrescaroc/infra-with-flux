@@ -16,3 +16,6 @@ spec:
             containers:
               - name: tcp-echo-container
                 image: andrescaroc/tcp-echo-server:v0.1.8
+    target:
+      kind: Deployment
+      name: tcp-echo-server
