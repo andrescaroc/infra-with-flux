@@ -11,6 +11,15 @@ spec:
     kind: GitRepository
     name: tcp-echo-server
   targetNamespace: tcp-echo
-  images:
-    - name: tcp-echo-container
-      newTag: v0.1.8
+  patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: tcp-echo-server
+      spec:
+        template:
+          spec:
+            containers:
+              - name: tcp-echo-container
+                image: andrescaroc/tcp-echo-server:v0.1.7
