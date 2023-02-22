@@ -81,6 +81,7 @@ The apps configuration is structured into:
 │   │   ├── kustomization.yaml
 │   │   └── podinfo-values.yaml
 │   └── tcp-echo
+│       ├── image-tag-patch.yaml
 │       └── kustomization.yaml
 └── staging
     ├── kustomization.yaml
@@ -88,6 +89,7 @@ The apps configuration is structured into:
     │   ├── kustomization.yaml
     │   └── podinfo-values.yaml
     └── tcp-echo
+        ├── image-tag-patch.yaml
         └── kustomization.yaml
 ```
 
@@ -107,3 +109,59 @@ The infrastructure is structured into:
     └── kustomization.yaml
 ```
 
+## Deploy new app releases
+
+For the `tcp-echo` service, you can observe that at the time of writing, the staging version is set to v0.1.8 and the production version is set to v0.1.7. This can be modified in their respective kustomizations as show here:
+
+Edit the image field in the file `./apps/staging/tcp-echo/image-tag-patch.yaml` for staging
+```yaml
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tcp-echo-server
+  namespace: tcp-echo
+spec:
+  patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: tcp-echo-server
+      spec:
+        template:
+          spec:
+            containers:
+              - name: tcp-echo-container
+                image: andrescaroc/tcp-echo-server:v0.1.8
+    target:
+      kind: Deployment
+      name: tcp-echo-server
+
+```
+
+
+Edit the image field in the file `./apps/production/tcp-echo/image-tag-patch.yaml` for production
+```yaml
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tcp-echo-server
+  namespace: tcp-echo
+spec:
+  patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: tcp-echo-server
+      spec:
+        template:
+          spec:
+            containers:
+              - name: tcp-echo-container
+                image: andrescaroc/tcp-echo-server:v0.1.7
+    target:
+      kind: Deployment
+      name: tcp-echo-server
+
+```
