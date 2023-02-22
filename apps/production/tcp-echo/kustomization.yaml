@@ -3,3 +3,8 @@ kind: Kustomization
 namespace: tcp-echo
 resources:
   - ../../base/tcp-echo
+patches:
+  - path: deploy-patch.yaml
+    target:
+      kind: Deployment
+      name: tcp-echo-server
