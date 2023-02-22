@@ -26,3 +26,15 @@ spec:
     target:
       kind: Deployment
       name: tcp-echo-server
+  - patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: tcp-echo-server
+      spec:
+        ingressClassName: nginx
+        rules:
+        - host: tcp-echo.staging.com
+    target:
+      kind: Ingress
+      name: tcp-echo-server
