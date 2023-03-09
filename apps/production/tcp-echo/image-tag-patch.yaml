@@ -27,7 +27,7 @@ spec:
       spec:
         ingressClassName: nginx
         rules:
-        - host: tcp-echo.production.com
+        - host: tcp-echo.my-domain.site
     target:
       kind: Ingress
       name: tcp-echo-server
